@@ -6,7 +6,7 @@
 // If the log reader goes away (closed pipe), exit cleanly instead of crashing on EPIPE.
 process.stdout.on('error', function () { process.exit(0); });
 
-const stepMs = parseInt(process.env.BUILD_STEP_MS || '5000', 10);
+const stepMs = parseInt(process.env.BUILD_STEP_MS || '7000', 10);
 const steps = [
   'Resolving dependencies',
   'Compiling TypeScript sources',
@@ -32,7 +32,7 @@ function sleep(ms) {
 
 (async function () {
   const total = steps.length;
-  log('Starting build: ' + total + ' steps, ~' + (total * stepMs) / 1000 + 's');
+  log('Starting build: ' + total + ' steps, ~' + (total * stepMs) / 2000 + 's');
   for (let i = 0; i < total; i++) {
     log('[' + (i + 1) + '/' + total + '] ' + steps[i] + '...');
     await sleep(stepMs);
